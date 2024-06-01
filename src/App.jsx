@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{ grid, setGrid, attempt, setAttempt }}>
+      <AppContext.Provider value={{ grid, setGrid, attempt, setAttempt}}>
         <Nav />
         <Grid />
         <Keyboard />

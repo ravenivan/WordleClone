@@ -38,6 +38,7 @@ nav h1 {
   color: white;
   position: absolute;
   right: 75px;
+  top: 35px;
 }
 
 
@@ -124,4 +125,69 @@ nav h1 {
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+
+/* Sign up screen */
+.login-screen {
+  width: 50vw;
+  height: 40vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 20px;
+  background-color: wheat;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 3px solid hsl(240, 2%, 23%);
+  border-radius: 4px;
+
+  /* visibility: hidden; */
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.login-exit {
+  position: absolute;
+  right: 20px;
+}
+
+.login-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login-text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.signup {
+  font-weight: 700;
+  background-color: black;
+  color: white;
+  width: 100%;
+  margin-top: 20px;
+  padding: 8px 0px;
+  border-radius: 4px;
 }
