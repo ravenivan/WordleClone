@@ -1,32 +1,45 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { auth } from "../../firebase";
+import React, { useContext, useState } from 'react';
+import { auth } from '../../firebase.js'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
+import { AppContext } from '../App.jsx';
 
-const Signup = () => {
+const Signup = ({ hideSignup, setHideSignUp, signupScreen, loginScreen }) => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(AppContext);
 
-  const signIn = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const [email, setEmail] = useState("a");
+  const [password, setPassword] = useState("a");
+
+  function signUp() {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => alert(`You created a new account ${user} `))
+      .catch((error) => alert(error));
+  }
+
+  function logIn() {
+    signInWithEmailAndPassword(auth, "ivanl121@nycstudents.net", "ivan123")
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  }
 
   return (
-    <div className={`login-screen ${hideSignup && "hide"}`}>
-      <button className="login-exit" onClick={hideScreen} >
+
+
+    <div className={`signup-screen ${hideSignup && "hide"}`}>
+      <button className="signup-exit" onClick={signupScreen} >
         <FontAwesomeIcon icon={faX} />
       </button>
-      <h1 className='login-title'>Log into your account</h1>
-      <form action="" className="login-form">
-        <div className="login-email">
-          <h3 className='login-text'>Email</h3>
+      <h1 className='signup-title'>Sign up to track your stats</h1>
+      <form action="" className="signup-form">
+        <div className="signup-email">
+          <h3 className='signup-text'>Email</h3>
           <input
             type="text"
             id="email"
@@ -36,8 +49,8 @@ const Signup = () => {
             required
           />
         </div>
-        <div className="login-password">
-          <h3 className='login-text'>Password</h3>
+        <div className="signup-password">
+          <h3 className='signup-text'>Password</h3>
           <input
             type="password"
             id="password"
@@ -48,11 +61,15 @@ const Signup = () => {
           />
         </div>
       </form>
-      <button>Already have an account? Sign in!</button>
-      <button className="signup" onClick={signUp}>Sign up</button>
+      <button onClick={() => {
+        signupScreen();
+        loginScreen();
+      }} >
+        Already have an account? Sign in!
+      </button>
+      <button className="signup-btn" onClick={signUp}>Sign up</button>
     </div>
   );
-
 }
 
 export default Signup;

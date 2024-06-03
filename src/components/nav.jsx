@@ -11,12 +11,11 @@ const Nav = () => {
     const { user, setUser } = useContext(AppContext);
 
     const [hideSignup, setHideSignup] = useState(true);
-    const [hideSignin, setHideSignin] = useState(true);
+    const [hideLogin, setHideLogin] = useState(trueg);
 
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log(user)
                 setUser(user);
             } else {
                 setUser(null);
@@ -26,9 +25,14 @@ const Nav = () => {
 
     }, []);
 
-    function hideScreen() {
+    function signupScreen() {
         const change = !hideSignup;
         setHideSignup(change);
+    }
+
+    function loginScreen() {
+        const change = !hideLogin;
+        setHideLogin(change);
     }
 
     function logOut() {
@@ -43,10 +47,11 @@ const Nav = () => {
                 {user ? (
                     <button className="login" onClick={logOut} >Signed in {user.email[0]}</button>
                 ) : (
-                    <button className="login" onClick={hideScreen} >Login</button>
+                    <button className="login" onClick={signupScreen} >Login</button>
                 )}
             </nav>
-            <Login hideSignup={hideSignup} setHideSignUp={setHideSignup} hideScreen={hideScreen} />
+            <Signup hideSignup={hideSignup} setHideSignUp={setHideSignup} signupScreen={signupScreen} loginScreen={loginScreen} />
+            <Login hideLogin={hideLogin} setHideLogin={setHideLogin} loginScreen={loginScreen} />
 
         </>
 

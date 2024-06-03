@@ -1,70 +1,73 @@
-import React, { useContext, useState } from 'react';
-import { auth } from '../../firebase.js'
-import { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
- } from 'firebase/auth';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
-import { AppContext } from '../App.jsx';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { auth } from "../../firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "../App";
 
-const login = ( {hideSignup, setHideSignUp, hideScreen} ) => {
+const Login = ( {hideLogin, setHideLogin, loginScreen }) => {
 
-    const { user, setUser} = useContext(AppContext);
+	const { user, setUser } = useContext(AppContext);
 
-    const [email, setEmail] = useState("a");
-    const [password, setPassword] = useState("a");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    function signUp() {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((user) => alert(`You created a new account ${user} `))
-            .catch((error) => alert(error));
-    }
+  // const signIn = (e) => {
+  //   e.preventDefault();
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((response) => {
+  //       setUser(user)
+  //     })
+  //     .catch((error) => {
+  //       alert(error);
+  //     });
+  // };
 
-    function logIn() {
-        signInWithEmailAndPassword(auth, "ivanl121@nycstudents.net", "ivan123")
-            .then((response) => console.log(response))
-            .catch((error) => console.log(error));
-    }
+	function login() {
+		signInWithEmailAndPassword(auth, email, password)
+			.then((response) => {
+				setUser(response.user);
+				alert("Sign in successful!")
+			})
+			.catch((error) => alert(error));
+	}
 
-    return (
-
-
-        <div className={`login-screen ${hideSignup && "hide"}`}>
-            <button className="login-exit" onClick={hideScreen} >
-                <FontAwesomeIcon icon={faX}/>
-            </button>
-            <h1 className='login-title'>Sign up to track your stats</h1>
-            <form action="" className="login-form">
-                <div className="login-email">
-                    <h3 className='login-text'>Email</h3>
-                    <input 
-                        type="text" 
-                        id="email" 
-                        placeholder="Enter email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required 
-                    />
-                </div>
-                <div className="login-password">
-                    <h3 className='login-text'>Password</h3>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        placeholder='Password' 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required 
-                    />
-                </div>
-            </form>
-            <button>Already have an account? Sign in!</button>
-            <button className="signup" onClick={signUp}>Sign up</button>
+  return (
+    <div className={`login-screen ${hideLogin && "hide"}`}>
+      <button className="login-exit" onClick={loginScreen} >
+        <FontAwesomeIcon icon={faX} />
+      </button>
+      <h1 className='login-title'>Log into your account</h1>
+      <form action="" className="login-form">
+        <div className="login-email">
+          <h3 className='login-text'>Email</h3>
+          <input
+            type="text"
+            id="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-    );
+        <div className="login-password">
+          <h3 className='login-text'>Password</h3>
+          <input
+            type="password"
+            id="password"
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+      </form>
+
+      <button className="login-btn" onClick={login}>Log in</button>
+    </div>
+  );
+
 }
 
-export default login;
+export default Login;
+
