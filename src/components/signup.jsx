@@ -10,28 +10,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { AppContext } from '../App.jsx';
 
-const Signup = ({ hideSignup, setHideSignUp, signupScreen, loginScreen }) => {
+const Signup = ({ hideSignup, signupScreen, loginScreen }) => {
 
   const { user, setUser } = useContext(AppContext);
 
-  const [email, setEmail] = useState("a");
-  const [password, setPassword] = useState("a");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function signUp() {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((user) => alert(`You created a new account ${user} `))
+      .then((newUser) => {
+        setEmail("");
+        setPassword("");
+        signupScreen();
+        alert(`You created a new account ${newUser.user.email} `)
+      })
       .catch((error) => alert(error));
   }
 
-  function logIn() {
-    signInWithEmailAndPassword(auth, "ivanl121@nycstudents.net", "ivan123")
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-  }
-
   return (
-
-
     <div className={`signup-screen ${hideSignup && "hide"}`}>
       <button className="signup-exit" onClick={signupScreen} >
         <FontAwesomeIcon icon={faX} />
@@ -61,12 +58,15 @@ const Signup = ({ hideSignup, setHideSignUp, signupScreen, loginScreen }) => {
           />
         </div>
       </form>
-      <button onClick={() => {
+      <div className="signup-login">
+        <h4>Have an account already?</h4>
+        <button className='signup-login-btn' onClick={() => {
         signupScreen();
         loginScreen();
-      }} >
-        Already have an account? Sign in!
-      </button>
+        }} >
+        Sign in!
+        </button>
+      </div>
       <button className="signup-btn" onClick={signUp}>Sign up</button>
     </div>
   );

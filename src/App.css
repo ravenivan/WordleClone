@@ -41,6 +41,18 @@ nav h1 {
   top: 35px;
 }
 
+.logged-in {
+  color: white;
+  position: absolute;
+  right: 55px;
+  top: 20px;
+  border: 1px solid white;
+  border-radius: 99999px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+}
+
 
 /* Keyboard */
 
@@ -129,8 +141,8 @@ nav h1 {
 
 /* Sign up screen */
 .signup-screen {
-  width: 50vw;
-  height: 40vh;
+  width: 500px;
+  height: 350px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -182,6 +194,17 @@ nav h1 {
   border-radius: 4px;
 }
 
+.signup-login {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-login-btn {
+  color: blue;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
 .signup-btn {
   font-weight: 700;
   background-color: black;
@@ -195,8 +218,8 @@ nav h1 {
 /* Login Screen */
 
 .login-screen {
-  width: 50vw;
-  height: 40vh;
+  width: 500px;
+  height: 350px;
   position: absolute;
   top: 0;
   bottom: 0;

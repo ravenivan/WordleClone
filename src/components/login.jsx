@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../App";
 
-const Login = ( {hideLogin, setHideLogin, loginScreen }) => {
+const Login = ( {hideLogin, loginScreen }) => {
 
 	const { user, setUser } = useContext(AppContext);
 
@@ -26,7 +26,10 @@ const Login = ( {hideLogin, setHideLogin, loginScreen }) => {
 	function login() {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((response) => {
-				setUser(response.user);
+				setUser(response.user); // maybe can be removed, need test
+        setEmail("");
+        setPassword("");
+        loginScreen();
 				alert("Sign in successful!")
 			})
 			.catch((error) => alert(error));

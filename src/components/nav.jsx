@@ -11,7 +11,7 @@ const Nav = () => {
     const { user, setUser } = useContext(AppContext);
 
     const [hideSignup, setHideSignup] = useState(true);
-    const [hideLogin, setHideLogin] = useState(trueg);
+    const [hideLogin, setHideLogin] = useState(true);
 
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
@@ -21,8 +21,6 @@ const Nav = () => {
                 setUser(null);
             }
         });
-
-
     }, []);
 
     function signupScreen() {
@@ -45,13 +43,13 @@ const Nav = () => {
             <nav>
                 <h1>Wordle</h1>
                 {user ? (
-                    <button className="login" onClick={logOut} >Signed in {user.email[0]}</button>
+                    <button className="logged-in" onClick={logOut} >{user.email[0].toUpperCase()}</button>
                 ) : (
                     <button className="login" onClick={signupScreen} >Login</button>
                 )}
             </nav>
-            <Signup hideSignup={hideSignup} setHideSignUp={setHideSignup} signupScreen={signupScreen} loginScreen={loginScreen} />
-            <Login hideLogin={hideLogin} setHideLogin={setHideLogin} loginScreen={loginScreen} />
+            <Signup hideSignup={hideSignup} signupScreen={signupScreen} loginScreen={loginScreen} />
+            <Login hideLogin={hideLogin} loginScreen={loginScreen} />
 
         </>
 
