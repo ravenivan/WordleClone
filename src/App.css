@@ -94,8 +94,13 @@ nav h1 {
   height: 1.75em;
 }
 
-.key:hover, .key:focus {
+.key:hover{
   --offset: 10%;
+}
+
+.key:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .key.wrong {
