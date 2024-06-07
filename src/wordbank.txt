@@ -18,7 +18,7 @@ actor
 acute
 adage
 adapt
-adept
+adept 
 admin
 admit
 adobe

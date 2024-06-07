@@ -135,13 +135,34 @@ nav h1 {
 .tile {
   font-size: 2em;
   color: white;
-  border: 0.05em solid hsl(240, 2%, 23%);
+  border: 0.05em solid grey;
   text-transform: uppercase;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
+  background-color: hsl(
+    var(--hue, 0), 
+    var(--saturation, 0%), 
+    var(--lightness, 0%)
+  );
+}
+
+.tile.wrong {
+  background-color: #3a393c;
+}
+
+.tile.wrong-spot {
+  --hue: 49;
+  --saturation: 51%;
+  --lightness: 47%;
+}
+
+.tile.correct {
+  --hue: 115;
+  --saturation: 29%;
+  --lightness: 43%;
 }
 
 /* Sign up screen */

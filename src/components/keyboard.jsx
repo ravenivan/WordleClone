@@ -4,7 +4,7 @@ import { AppContext } from '../App';
 
 const Keyboard = () => {
 
-  const { enter, deleteLetter, selectLetter} = useContext(AppContext);
+  const { enter, deleteLetter, selectLetter, wrongLetters} = useContext(AppContext);
 
   const row1Keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const row2Keys = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
@@ -18,7 +18,7 @@ const Keyboard = () => {
       deleteLetter();
     } else {
       allLetterKeys.forEach((key) => {
-        if (event.key.toUpperCase() === key.toUpperCase()) {
+        if (event.key.toLowerCase() === key.toLowerCase()) {
           selectLetter(key);
         }
       })
@@ -36,16 +36,16 @@ const Keyboard = () => {
   return (
     <div className='keyboard' onKeyDown={keyboardEventListener} >
       {row1Keys.map((keyVal, key) => {
-        return <Key keyValue={keyVal} bigKey={false} key={key} />
+        return <Key keyValue={keyVal} bigKey={false} wrong={wrongLetters.includes(keyVal)} key={key} />
       })}
       <div className="space"></div>
       {row2Keys.map((keyVal, key) => {
-        return <Key keyValue={keyVal} bigKey={false} key={key} />
+        return <Key keyValue={keyVal} bigKey={false} wrong={wrongLetters.includes(keyVal)} key={key} />
       })}
       <div className="space"></div>
       <Key keyValue={"ENTER"} bigKey={true} />
       {row3Keys.map((keyVal, key) => {
-        return <Key keyValue={keyVal} bigKey={false} key={key} />
+        return <Key keyValue={keyVal} bigKey={false} wrong={wrongLetters.includes(keyVal)} key={key} />
       })}
       <Key keyValue={
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" className="game-icon backspace" data-testid="icon-backspace">

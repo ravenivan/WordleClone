@@ -1,9 +1,11 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
+import axios from "axios"
 import './App.css'
 import Keyboard from './components/keyboard.jsx'
 import Grid from './components/grid.jsx'
 import Nav from './components/nav.jsx'
-import { wordleGrid } from './words.js'
+import { wordleGrid} from './words.js'
+import wordbank from "./wordbank.txt";
 
 export const AppContext = createContext();
 
@@ -12,6 +14,27 @@ function App() {
   const [user, setUser] = useState(null);
   const [grid, setGrid] = useState(wordleGrid);
   const [attempt, setAttempt] = useState({ row: 0, column: 0 });
+  const [wordSet, setWordSet] = useState(new Set());
+  const [wrongLetters, setWrongLetters] = useState([]);
+
+  const chosenWord = "POWER"
+
+  /* Word Set */
+
+  async function fetchWordSet() {
+    let { data } = await axios("http://localhost:5173/src/wordbank.txt");
+
+    const wordArr = data.split("\n")
+    const wordSet = new Set(wordArr);
+    
+    setWordSet(wordSet)
+  }
+
+  useEffect(() => {
+    fetchWordSet();
+  }, [])
+
+  /* Letters and keyboard functionality */
 
   function deleteLetter() {
     if (attempt.column === 0) {
@@ -27,7 +50,21 @@ function App() {
     if (attempt.column !== 5) {
       return;
     }
-    setAttempt({ row: attempt.row + 1, column: 0 });
+
+    let enteredGuess = "";
+    for (let i = 0; i < 5; i++) {
+      enteredGuess += grid[attempt.row][i];
+    }
+
+    if (wordSet.has(enteredGuess.toLowerCase()+ "\r")) {
+      setAttempt({ row: attempt.row + 1, column: 0 });
+    } else {
+      alert("Word not found!")
+    }
+
+    if (enteredGuess === chosenWord) {
+      alert("You WIn!")
+    }
   }
 
   function selectLetter(keyValue) {
@@ -47,7 +84,9 @@ function App() {
         grid, setGrid,
         attempt, setAttempt,
         user, setUser,
-        selectLetter, deleteLetter, enter
+        selectLetter, deleteLetter, enter,
+        chosenWord,
+        wrongLetters, setWrongLetters
       }}>
         <Nav />
         <Grid />
