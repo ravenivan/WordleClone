@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   font-family: Arial;
 
@@ -32,6 +35,7 @@ nav h1 {
   font-family: Helvetica, Arial, sans-serif;
   color: white;
   font-size: 45px;
+  font-weight: 700;
 }
 
 .login {
@@ -72,11 +76,9 @@ nav h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsl(
-    var(--hue, 200),
-    var(--saturation, 1%),
-    calc(var(--lightness, 51%) + var(--offset, 0%))
-  );
+  background-color: hsl(var(--hue, 200),
+      var(--saturation, 1%),
+      calc(var(--lightness, 51%) + var(--offset, 0%)));
   color: white;
   fill: white;
   text-transform: uppercase;
@@ -94,7 +96,7 @@ nav h1 {
   height: 1.75em;
 }
 
-.key:hover{
+.key:hover {
   --offset: 10%;
 }
 
@@ -142,11 +144,9 @@ nav h1 {
   justify-content: center;
   align-items: center;
   user-select: none;
-  background-color: hsl(
-    var(--hue, 0), 
-    var(--saturation, 0%), 
-    var(--lightness, 0%)
-  );
+  background-color: hsl(var(--hue, 0),
+      var(--saturation, 0%),
+      var(--lightness, 0%));
 }
 
 .tile.wrong {
@@ -299,4 +299,126 @@ nav h1 {
   margin-top: 20px;
   padding: 8px 0px;
   border-radius: 4px;
+}
+
+/* Game Over */
+
+.end-screen {
+  width: 550px;
+  height: 600px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 20px;
+  background-color: wheat;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 3px solid hsl(240, 2%, 23%);
+  border-radius: 4px;
+}
+
+.end-exit {
+  position: absolute;
+  right: 20px;
+}
+
+.end-data {
+  margin-top: 20px;
+}
+
+.end-title {
+  font-family: "Libre Franklin", Arial;
+  font-size: 34px;
+  font-weight: 700;
+  text-align: center;
+
+}
+
+.end-statistics {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.end-statistics-title {
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.end-statistics-stats {
+  display: flex;
+  gap: 8px;
+}
+
+.end-stat {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  text-align: center;
+}
+
+.end-stat-num {
+  font-family: "Libre Franklin", Arial;
+  font-size: 36px;
+}
+
+.end-stat-title {
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+.end-distribution {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.end-distribution-title {
+  
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.end-distribution-distributions {
+  display: flex;
+  flex-direction: column;
+}
+
+.end-distribution-distribution {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-right: 24px;
+}
+
+.end-distribution-distribution-attempt {
+  font-family: "Libre Franklin", Arial;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.end-distribution-distribution-num {
+  font-family: "Libre Franklin", Arial;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.end-btn {
+  font-family: "Libre Franklin", Arial;
+  font-weight: 700;
+  background-color: black;
+  color: white;
+  width: 100%;
+  margin-top: 20px;
+  padding: 8px 0px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
 }

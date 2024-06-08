@@ -6,6 +6,8 @@ import Grid from './components/grid.jsx'
 import Nav from './components/nav.jsx'
 import { wordleGrid} from './words.js'
 import wordbank from "./wordbank.txt";
+import toast, { Toaster } from 'react-hot-toast';
+import GameEnd from './components/gameEnd.jsx'
 
 export const AppContext = createContext();
 
@@ -17,6 +19,11 @@ function App() {
   const [wordSet, setWordSet] = useState(new Set());
   const [wrongLetters, setWrongLetters] = useState([]);
   const [chosenWord, setChosenWord] = useState("");
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    isWordGuessed: false
+  });
+  const [hideEndScreen, setHideEndScreen] = useState(false);
 
 
   /* Word Set */
@@ -29,11 +36,9 @@ function App() {
 
     const wordChosen = wordArr[Math.floor(Math.random() * wordArr.length )]
     
-    setChosenWord(wordChosen);
+    setChosenWord(wordChosen.toUpperCase());
     setWordSet(wordsSet)
-    console.log(wordSet);
-    console.log(chosenWord);
-    console.log(wordsSet);
+
 
 
     // return { wordChosen, wordSet}
@@ -48,6 +53,9 @@ function App() {
       //   console.log(chosenWord);
       //   console.log(wordSet);
       // })
+
+
+
   }, [])
 
   /* Letters and keyboard functionality */
@@ -75,12 +83,21 @@ function App() {
     if (wordSet.has(enteredGuess.toLowerCase()+ "\r")) {
       setAttempt({ row: attempt.row + 1, column: 0 });
     } else {
-      alert("Word not found!")
+      toast.error("Word not found!");
     }
 
-    if (enteredGuess === chosenWord) {
-      alert("You WIn!")
+    if (enteredGuess + "\r" === chosenWord) {
+      toast.success("You win!")
+      setGameOver({gameOver: true, isWordGuessed: true});
+      return;
     }
+
+    if (attempt.row === 5) {
+      toast(chosenWord);
+      setGameOver({gameOver: true, isWordGuessed: false});
+    }
+
+    console.log(chosenWord);
   }
 
   function selectLetter(keyValue) {
@@ -102,11 +119,15 @@ function App() {
         user, setUser,
         selectLetter, deleteLetter, enter,
         chosenWord,
-        wrongLetters, setWrongLetters
+        wrongLetters, setWrongLetters,
+        gameOver, setGameOver,
+        hideEndScreen, setHideEndScreen
       }}>
+        <Toaster position='top-center' />
         <Nav />
         <Grid />
         <Keyboard />
+        <GameEnd />
       </AppContext.Provider>
     </>
   )

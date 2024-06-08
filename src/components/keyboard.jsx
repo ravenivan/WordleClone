@@ -18,7 +18,7 @@ const Keyboard = () => {
       deleteLetter();
     } else {
       allLetterKeys.forEach((key) => {
-        if (event.key.toLowerCase() === key.toLowerCase()) {
+        if (event.key.toUpperCase() === key.toUpperCase()) {
           selectLetter(key);
         }
       })
