@@ -16,22 +16,38 @@ function App() {
   const [attempt, setAttempt] = useState({ row: 0, column: 0 });
   const [wordSet, setWordSet] = useState(new Set());
   const [wrongLetters, setWrongLetters] = useState([]);
+  const [chosenWord, setChosenWord] = useState("");
 
-  const chosenWord = "POWER"
 
   /* Word Set */
 
   async function fetchWordSet() {
-    let { data } = await axios("http://localhost:5173/src/wordbank.txt");
+    const { data } = await axios("http://localhost:5173/src/wordbank.txt");
 
     const wordArr = data.split("\n")
-    const wordSet = new Set(wordArr);
+    const wordsSet = new Set(wordArr);
+
+    const wordChosen = wordArr[Math.floor(Math.random() * wordArr.length )]
     
-    setWordSet(wordSet)
+    setChosenWord(wordChosen);
+    setWordSet(wordsSet)
+    console.log(wordSet);
+    console.log(chosenWord);
+    console.log(wordsSet);
+
+
+    // return { wordChosen, wordSet}
+
   }
 
   useEffect(() => {
-    fetchWordSet();
+    fetchWordSet()
+      // .then((words) => {
+      //   setChosenWord(words.wordChosen);
+      //   setWordSet(words.wordSet);
+      //   console.log(chosenWord);
+      //   console.log(wordSet);
+      // })
   }, [])
 
   /* Letters and keyboard functionality */
