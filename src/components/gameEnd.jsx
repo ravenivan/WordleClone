@@ -12,7 +12,11 @@ const GameEnd = () => {
 	function endScreen() {
 		const change = !hideEndScreen;
 		setHideEndScreen(change);
-}
+	}
+
+	function refreshPage() {
+		window.location.reload();
+	}
 
 	return (
 		<div>
@@ -46,11 +50,12 @@ const GameEnd = () => {
 							<GameEndDistribution attempt="Fourth Attempt:" num="2" />
 							<GameEndDistribution attempt="Fifth Attempt:" num="2" />
 							<GameEndDistribution attempt="Sixth Attempt:" num="2" />
+							<GameEndDistribution attempt="Failed:" num="2" />
 						</div>
 					</div>
 				</div>
 
-				<button className="end-btn">
+				<button className="end-btn" onClick={refreshPage}  >
 					Play Again
 				</button>
 			</div>

@@ -15,7 +15,6 @@ const TileLetter = ({ row, column }) => {
 	useEffect(() => {
 		if (tileLetter !== "" && !correct && !wrongSpot) {
 			setWrongLetters((prev) => [...prev, tileLetter ])
-			console.log(wrongLetters);
 		}
 	}, [attempt.row])
 

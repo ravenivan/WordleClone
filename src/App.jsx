@@ -1,13 +1,15 @@
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext, useEffect, useRef } from 'react'
 import axios from "axios"
 import './App.css'
 import Keyboard from './components/keyboard.jsx'
 import Grid from './components/grid.jsx'
 import Nav from './components/nav.jsx'
-import { wordleGrid} from './words.js'
+import { wordleGrid, emptyWordleGrid } from './words.js'
 import wordbank from "./wordbank.txt";
 import toast, { Toaster } from 'react-hot-toast';
-import GameEnd from './components/gameEnd.jsx'
+import GameEnd from './components/gameEnd.jsx';
+import { logNewGame } from './userData.js'
+// import {auth} from './firebase/firebase.js';
 
 export const AppContext = createContext();
 
@@ -25,6 +27,8 @@ function App() {
   });
   const [hideEndScreen, setHideEndScreen] = useState(false);
 
+  const isFirstRender = useRef(true);
+
 
   /* Word Set */
 
@@ -38,25 +42,20 @@ function App() {
     
     setChosenWord(wordChosen.toUpperCase());
     setWordSet(wordsSet)
-
-
-
-    // return { wordChosen, wordSet}
-
   }
 
   useEffect(() => {
     fetchWordSet()
-      // .then((words) => {
-      //   setChosenWord(words.wordChosen);
-      //   setWordSet(words.wordSet);
-      //   console.log(chosenWord);
-      //   console.log(wordSet);
-      // })
-
-
-
   }, [])
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      console.log('asd');
+      return;
+    }
+    logNewGame(attempt, gameOver, user);
+  }, [gameOver.gameOver])
 
   /* Letters and keyboard functionality */
 
@@ -72,6 +71,7 @@ function App() {
 
   function enter() {
     if (attempt.column !== 5) {
+      toast.error("Not a 5 letter word!")
       return;
     }
 
@@ -98,6 +98,7 @@ function App() {
     }
 
     console.log(chosenWord);
+    console.log(attempt.row);
   }
 
   function selectLetter(keyValue) {
@@ -109,6 +110,14 @@ function App() {
     setGrid(edittedGrid);
     setAttempt({ ...attempt, column: attempt.column + 1 });
   }
+
+  // /* New Game */
+  // function restartGame() {
+	// 	setGrid(emptyWordleGrid);
+  //   setAttempt({ row: 0, column: 0 });
+  //   setWrongLetters([]);
+
+	// }
 
 
   return (

@@ -14,7 +14,7 @@ const Nav = () => {
     const [hideLogin, setHideLogin] = useState(true);
 
     useEffect(() => {
-        const listen = onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
             } else {
