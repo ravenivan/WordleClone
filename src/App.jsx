@@ -25,7 +25,7 @@ function App() {
     gameOver: false,
     isWordGuessed: false
   });
-  const [hideEndScreen, setHideEndScreen] = useState(false);
+  const [hideEndScreen, setHideEndScreen] = useState(true);
 
   const isFirstRender = useRef(true);
 
@@ -80,15 +80,16 @@ function App() {
       enteredGuess += grid[attempt.row][i];
     }
 
-    if (wordSet.has(enteredGuess.toLowerCase()+ "\r")) {
+    if (wordSet.has(enteredGuess.toLowerCase() /* + "\r" */)) {
       setAttempt({ row: attempt.row + 1, column: 0 });
     } else {
       toast.error("Word not found!");
     }
 
-    if (enteredGuess + "\r" === chosenWord) {
+    if (enteredGuess /* + "\r" */=== chosenWord) {
       toast.success("You win!")
       setGameOver({gameOver: true, isWordGuessed: true});
+      setHideEndScreen(false);
       return;
     }
 

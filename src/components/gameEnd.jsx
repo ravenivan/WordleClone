@@ -1,13 +1,24 @@
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GameEndStat from './ui/gameEnd-stat';
 import GameEndDistribution from './ui/gameEnd-distribution';
 import { AppContext } from '../App';
+import { fetchUserData } from '../userData';
 
 const GameEnd = () => {
 
-	const { hideEndScreen, setHideEndScreen } = useContext(AppContext);
+	const { hideEndScreen, setHideEndScreen, user, gameOver } = useContext(AppContext);
+	
+	let userTotalGames;
+	let userWinRate;
+	let userFirstAttempt;
+	let userSecondAttempt;
+	let userThirdAttempt;
+	let userFourthAttempt;
+	let userFifthAttempt;
+	let userSixthAttempt;
+	let userLost;
 
 	function endScreen() {
 		const change = !hideEndScreen;
@@ -16,7 +27,26 @@ const GameEnd = () => {
 
 	function refreshPage() {
 		window.location.reload();
-	}
+	} 
+
+	useEffect(() => {
+		if (!gameOver.gameOver) return;
+		
+
+		fetchUserData(user).then((userData) => {
+			userTotalGames = userData.totalGames;
+			userWinRate = userData.winRate;
+			userFirstAttempt = userData.firstAttempt;
+			userSecondAttempt = userData.secondAttempt;
+			userThirdAttempt = userData.thirdAttempt;
+			userFourthAttempt = userData.fourthAttempt;
+			userFifthAttempt = userData.fifthAttempt;
+			userSixthAttempt = userData.sixthAttempt;
+			userLost = userData.lost;
+		})
+	}, [gameOver])
+	
+
 
 	return (
 		<div>
@@ -32,8 +62,8 @@ const GameEnd = () => {
 							Statistics
 						</h4>
 						<div className="end-statistics-stats">
-							<GameEndStat num="6" title="Played" />
-							<GameEndStat num="50" title="Win %" />
+							<GameEndStat num={userTotalGames} title="Played" />
+							<GameEndStat num={userWinRate} title="Win %" />
 							<GameEndStat num="0" title="Win Streak" />
 							<GameEndStat num="1" title="Max Streak" />
 						</div>
@@ -44,17 +74,16 @@ const GameEnd = () => {
 							Distribution
 						</h4>
 						<div className="end-distribution-distributions">
-							<GameEndDistribution attempt="First Attempt:" num="2" />
-							<GameEndDistribution attempt="Second Attempt:" num="2" />
-							<GameEndDistribution attempt="Third Attempt:" num="2" />
-							<GameEndDistribution attempt="Fourth Attempt:" num="2" />
-							<GameEndDistribution attempt="Fifth Attempt:" num="2" />
-							<GameEndDistribution attempt="Sixth Attempt:" num="2" />
-							<GameEndDistribution attempt="Failed:" num="2" />
+							<GameEndDistribution attempt="First Attempt:" num={userFirstAttempt} />
+							<GameEndDistribution attempt="Second Attempt:" num={userSecondAttempt} />
+							<GameEndDistribution attempt="Third Attempt:" num={userThirdAttempt} />
+							<GameEndDistribution attempt="Fourth Attempt:" num={userFourthAttempt} />
+							<GameEndDistribution attempt="Fifth Attempt:" num={userFifthAttempt} />
+							<GameEndDistribution attempt="Sixth Attempt:" num={userSixthAttempt} />
+							<GameEndDistribution attempt="Failed:" num={userLost} />
 						</div>
 					</div>
 				</div>
-
 				<button className="end-btn" onClick={refreshPage}  >
 					Play Again
 				</button>
