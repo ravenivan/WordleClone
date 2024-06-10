@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { AppContext } from '../App.jsx';
+import toast from 'react-hot-toast';
 
 const Signup = ({ hideSignup, signupScreen, loginScreen }) => {
 
@@ -23,9 +24,9 @@ const Signup = ({ hideSignup, signupScreen, loginScreen }) => {
         setEmail("");
         setPassword("");
         signupScreen();
-        alert(`You created a new account ${newUser.user.email} `)
+        toast.success(`You created a new account ${newUser.user.email} `)
       })
-      .catch((error) => alert(error));
+      .catch((error) => toast.error("Email already in use or invalid"));
   }
 
   return (

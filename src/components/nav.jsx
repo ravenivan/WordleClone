@@ -8,10 +8,8 @@ import Signup from './signup.jsx';
 
 const Nav = () => {
 
-    const { user, setUser } = useContext(AppContext);
+    const { user, setUser, hideSignup, setHideSignup, hideLogin, setHideLogin } = useContext(AppContext);
 
-    const [hideSignup, setHideSignup] = useState(true);
-    const [hideLogin, setHideLogin] = useState(true);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {

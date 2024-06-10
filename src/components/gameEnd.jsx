@@ -1,6 +1,6 @@
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import GameEndStat from './ui/gameEnd-stat';
 import GameEndDistribution from './ui/gameEnd-distribution';
 import { AppContext } from '../App';
@@ -9,16 +9,25 @@ import { fetchUserData } from '../userData';
 const GameEnd = () => {
 
 	const { hideEndScreen, setHideEndScreen, user, gameOver } = useContext(AppContext);
+	const [ userTotalGames, setUserTotalGames ] = useState(0);
+	const [ userWinRate, setUserWinRate ] = useState(0);
+	const [ userFirstAttempt, setUserFirstAttempt ] = useState(0);
+	const [ userSecondAttempt, setUserSecondAttempt ] = useState(0);
+	const [ userThirdAttempt, setUserThirdAttempt ] = useState(0);
+	const [ userFourthAttempt, setUserFourthAttempt ] = useState(0);
+	const [ userFifthAttempt, setUserFifthAttempt ] = useState(0);
+	const [ userSixthAttempt, setUserSixthAttempt ] = useState(0);
+	const [ userLost, setuserLost ] = useState(0);
 	
-	let userTotalGames;
-	let userWinRate;
-	let userFirstAttempt;
-	let userSecondAttempt;
-	let userThirdAttempt;
-	let userFourthAttempt;
-	let userFifthAttempt;
-	let userSixthAttempt;
-	let userLost;
+	// let userTotalGames;
+	// let userWinRate;
+	// let userFirstAttempt;
+	// let userSecondAttempt;
+	// let userThirdAttempt;
+	// let userFourthAttempt;
+	// let userFifthAttempt;
+	// let userSixthAttempt;
+	// let userLost;
 
 	function endScreen() {
 		const change = !hideEndScreen;
@@ -29,22 +38,29 @@ const GameEnd = () => {
 		window.location.reload();
 	} 
 
+	// async function setUserData() {
+		
+	// }
+
 	useEffect(() => {
-		if (!gameOver.gameOver) return;
+		// if (!gameOver.gameOver) return;
+		if (user === null) return;
 		
 
-		fetchUserData(user).then((userData) => {
-			userTotalGames = userData.totalGames;
-			userWinRate = userData.winRate;
-			userFirstAttempt = userData.firstAttempt;
-			userSecondAttempt = userData.secondAttempt;
-			userThirdAttempt = userData.thirdAttempt;
-			userFourthAttempt = userData.fourthAttempt;
-			userFifthAttempt = userData.fifthAttempt;
-			userSixthAttempt = userData.sixthAttempt;
-			userLost = userData.lost;
-		})
-	}, [gameOver])
+		fetchUserData(user)
+		.then((userData) => {
+			setUserTotalGames(userData.totalGames);
+			setUserWinRate(userData.winRate);
+			setUserFirstAttempt(userData.firstAttempt);
+			setUserSecondAttempt(userData.secondAttempt);
+			setUserThirdAttempt(userData.thirdAttempt);
+			setUserFourthAttempt(userData.fourthAttempt);
+			setUserFifthAttempt(userData.fifthAttempt);
+			setUserSixthAttempt(userData.sixthAttempt);
+			setuserLost(userData.lost)
+
+		}).catch((error) => alert(error))
+	}, [user, gameOver])
 	
 
 
@@ -64,8 +80,6 @@ const GameEnd = () => {
 						<div className="end-statistics-stats">
 							<GameEndStat num={userTotalGames} title="Played" />
 							<GameEndStat num={userWinRate} title="Win %" />
-							<GameEndStat num="0" title="Win Streak" />
-							<GameEndStat num="1" title="Max Streak" />
 						</div>
 					</div>
 

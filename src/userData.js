@@ -30,7 +30,6 @@ export async function fetchUserData(user) {
     let lost = 0;
 
 
-
     const postsByUser = query(
         collection(database, "posts"),
         where("uid", "==", user.uid)
@@ -45,7 +44,7 @@ export async function fetchUserData(user) {
     })
 
     totalGames = posts.length; /* How many games user played */
-    winRate = Math.round((wins / totalGames) * 100); /* Win rate */
+    winRate = wins === 0 ? 0 : Math.round((wins / totalGames) * 100); /* Win rate */
 
     /* Check for distribution */
 
@@ -56,7 +55,6 @@ export async function fetchUserData(user) {
                 break;
             case 2: 
                 secondAttempt++;
-                console.log(post.attempts);
                 break;
             case 3:
                 thirdAttempt++;
@@ -76,22 +74,8 @@ export async function fetchUserData(user) {
         }
     })
 
-    console.log(firstAttempt);
-    console.log(secondAttempt);
-    console.log(thirdAttempt);
-    console.log(fourthAttempt);
-    console.log(fifthAttempt);
-    console.log(sixthAttempt);
-
-    console.log(wins);
-
-    console.log(posts);
-
     return { 
-        totalGames, 
-        winRate, 
-        lost,
-        firstAttempt, secondAttempt, thirdAttempt, fourthAttempt, fifthAttempt, sixthAttempt
+        totalGames, winRate, lost, firstAttempt, secondAttempt, thirdAttempt, fourthAttempt, fifthAttempt, sixthAttempt
     }
 
 

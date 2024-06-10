@@ -348,18 +348,21 @@ nav h1 {
   font-size: 16px;
   font-weight: 800;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .end-statistics-stats {
   display: flex;
-  gap: 8px;
+  gap: 64px;
+  justify-content: center;
 }
 
 .end-stat {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  /* width: 25%; */
   text-align: center;
+
 }
 
 .end-stat-num {
@@ -371,6 +374,7 @@ nav h1 {
   font-size: 20px;
   letter-spacing: 0.03em;
   font-weight: 600;
+  
 }
 
 .end-distribution {

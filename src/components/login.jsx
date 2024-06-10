@@ -4,6 +4,7 @@ import { auth } from "../../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../App";
+import toast from "react-hot-toast";
 
 const Login = ( {hideLogin, loginScreen }) => {
 
@@ -19,9 +20,9 @@ const Login = ( {hideLogin, loginScreen }) => {
         setEmail("");
         setPassword("");
         loginScreen();
-				alert("Sign in successful!")
+				toast.success("Sign in successful!");
 			})
-			.catch((error) => alert(error));
+			.catch((error) => toast.error("Invalid details!"));
 	}
 
   return (

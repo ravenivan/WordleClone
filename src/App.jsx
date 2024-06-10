@@ -25,6 +25,8 @@ function App() {
     gameOver: false,
     isWordGuessed: false
   });
+  const [hideSignup, setHideSignup] = useState(true);
+  const [hideLogin, setHideLogin] = useState(true);
   const [hideEndScreen, setHideEndScreen] = useState(true);
 
   const isFirstRender = useRef(true);
@@ -80,13 +82,13 @@ function App() {
       enteredGuess += grid[attempt.row][i];
     }
 
-    if (wordSet.has(enteredGuess.toLowerCase() /* + "\r" */)) {
+    if (wordSet.has(enteredGuess.toLowerCase()  + "\r" )) {
       setAttempt({ row: attempt.row + 1, column: 0 });
     } else {
       toast.error("Word not found!");
     }
 
-    if (enteredGuess /* + "\r" */=== chosenWord) {
+    if (enteredGuess  + "\r" === chosenWord) {
       toast.success("You win!")
       setGameOver({gameOver: true, isWordGuessed: true});
       setHideEndScreen(false);
@@ -96,10 +98,10 @@ function App() {
     if (attempt.row === 5) {
       toast(chosenWord);
       setGameOver({gameOver: true, isWordGuessed: false});
+      setHideEndScreen(false)
     }
 
     console.log(chosenWord);
-    console.log(attempt.row);
   }
 
   function selectLetter(keyValue) {
@@ -131,6 +133,8 @@ function App() {
         chosenWord,
         wrongLetters, setWrongLetters,
         gameOver, setGameOver,
+        hideSignup, setHideSignup,
+        hideLogin, setHideLogin,
         hideEndScreen, setHideEndScreen
       }}>
         <Toaster position='top-center' />
