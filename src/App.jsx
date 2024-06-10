@@ -82,13 +82,13 @@ function App() {
       enteredGuess += grid[attempt.row][i];
     }
 
-    if (wordSet.has(enteredGuess.toLowerCase()  )) {
+    if (wordSet.has(enteredGuess.toLowerCase()  + "\r" )) {
       setAttempt({ row: attempt.row + 1, column: 0 });
     } else {
       toast.error("Word not found!");
     }
 
-    if (enteredGuess   === chosenWord) {
+    if (enteredGuess  + "\r" === chosenWord) {
       toast.success("You win!")
       setGameOver({gameOver: true, isWordGuessed: true});
       setHideEndScreen(false);
