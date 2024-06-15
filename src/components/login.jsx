@@ -36,7 +36,7 @@ const Login = ( {hideLogin, loginScreen }) => {
           <h3 className='login-text'>Email</h3>
           <input
             type="text"
-            id="email"
+            id="log-email"
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -47,7 +47,7 @@ const Login = ( {hideLogin, loginScreen }) => {
           <h3 className='login-text'>Password</h3>
           <input
             type="password"
-            id="password"
+            id="log-password"
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
