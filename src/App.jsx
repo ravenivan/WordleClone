@@ -35,7 +35,7 @@ function App() {
   /* Word Set */
 
   async function fetchWordSet() {
-    const { data } = await axios("https://wordle-clone-5c06i461w-ivans-projects-f4e15082.vercel.app/assets/wordbank-CYgGGQMD.txt")
+    const { data } = await axios("http://localhost:5173/src/wordbank.txt")
 
     const wordArr = data.split("\n")
     const wordsSet = new Set(wordArr);
