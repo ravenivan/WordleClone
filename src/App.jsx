@@ -42,6 +42,7 @@ function App() {
 
     const wordArr = data.split("\n")
     const wordsSet = new Set(wordArr);
+    console.log(wordsSet);
 
 
     const wordChosen = wordArr[Math.floor(Math.random() * wordArr.length )]
