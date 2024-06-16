@@ -9,6 +9,8 @@ import wordbank from "./wordbank.txt";
 import toast, { Toaster } from 'react-hot-toast';
 import GameEnd from './components/gameEnd.jsx';
 import { logNewGame } from './userData.js'
+import OutreachNav from './components/outreachNav.jsx'
+import Title from './components/title.jsx'
 // import {auth} from './firebase/firebase.js';
 
 export const AppContext = createContext();
@@ -37,8 +39,10 @@ function App() {
   async function fetchWordSet() {
     const { data } = await axios("http://localhost:5173/src/wordbank.txt")
 
+
     const wordArr = data.split("\n")
     const wordsSet = new Set(wordArr);
+
 
     const wordChosen = wordArr[Math.floor(Math.random() * wordArr.length )]
     
@@ -138,6 +142,8 @@ function App() {
       }}>
         <Toaster position='top-center' />
         <Nav />
+        <OutreachNav />
+        <Title />
         <Grid />
         <Keyboard />
         <GameEnd />

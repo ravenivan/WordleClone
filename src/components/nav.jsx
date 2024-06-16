@@ -39,7 +39,6 @@ const Nav = () => {
     return (
         <>
             <nav>
-                <h1>Wordle</h1>
                 {user ? (
                     <button className="logged-in" onClick={logOut} >{user.email[0].toUpperCase()}</button>
                 ) : (
