@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../assets/logo.png'
+import Logo from '/assets/logo.png'
 import { faFacebook, faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { RiInstagramFill } from "react-icons/ri";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
