@@ -37,7 +37,7 @@ function App() {
   /* Word Set */
 
   async function fetchWordSet() {
-    const { data } = await axios("/src/components/wordbank.txt")
+    const { data } = await axios("/assets/wordbank-CYgGGQMD.txt")
 
 
     const wordArr = data.split("\n")
