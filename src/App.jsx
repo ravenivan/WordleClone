@@ -5,7 +5,7 @@ import Keyboard from './components/keyboard.jsx'
 import Grid from './components/grid.jsx'
 import Nav from './components/nav.jsx'
 import { wordleGrid, emptyWordleGrid } from './words.js'
-import wordbank from "./components/wordbank.txt";
+import wordbank from "./wordbank.txt";
 import toast, { Toaster } from 'react-hot-toast';
 import GameEnd from './components/gameEnd.jsx';
 import { logNewGame } from './userData.js'
