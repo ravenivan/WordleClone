@@ -128,18 +128,26 @@ nav {
   align-items: center;
   flex-direction: row;
   gap: 1.25rem;
-
+  
 }
 
-/* .nav__social__link {
-  width: 1.5rem;
-  height: 1.5rem;
-} */
+.nav__social__link:hover {
+  color: #566275;
+}
+
+.nav__social__link {
+  transition: 200ms ease-in
+}
 
 .nav__social__link-small {
   width: 1.25rem;
   height: 1.25rem;
   margin-bottom: 0.85rem;
+  transition: 200ms ease-in
+}
+
+.nav__social__link-small:hover {
+  color: #566275;
 }
 
 .nav__social__link-icon {

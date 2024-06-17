@@ -34,7 +34,7 @@ const OutreachNav = () => {
 
 				<div className="nav-right">
 					<div className="nav__social__links">
-						<a href="https://www.instagram.com/bthsoutreach" className="nav__social__link" target="_blank">
+						<a href="https://www.instagram.com/bthsoutreach" className="nav__social__link " target="_blank">
 							<RiInstagramFill className="nav__social__link-icon" />
 						</a>
 						<a href="https://www.facebook.com/groups/1731244133793834" className="nav__social__link-small" target="_blank">
